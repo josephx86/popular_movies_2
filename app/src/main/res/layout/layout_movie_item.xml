@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <ImageView
+        android:background="@drawable/border"
+        android:id="@+id/poster_iv"
+        android:layout_width="@dimen/movie_poster_width"
+        android:layout_height="@dimen/movie_poster_height"
+        android:contentDescription="@string/movie_poster"
+        android:src="@drawable/movie_poster_placeholder" />
+
+    <TextView
+        android:id="@+id/movie_name_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/secondaryDarkColor"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@id/poster_iv"
+        app:layout_constraintRight_toRightOf="@id/poster_iv"
+        app:layout_constraintTop_toBottomOf="@id/poster_iv"
+        tools:text="Movie name" />
+
+    <TextView
+        android:id="@+id/popularity_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movie_name_tv"
+        tools:text="Popularity: 345.45" />
+
+    <LinearLayout
+        android:id="@+id/rating_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popularity_tv" />
+</android.support.constraint.ConstraintLayout>
