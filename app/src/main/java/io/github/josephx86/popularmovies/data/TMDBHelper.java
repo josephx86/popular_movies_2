@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import io.github.josephx86.popularmovies.BuildConfig;
 import io.github.josephx86.popularmovies.R;
 import io.github.josephx86.popularmovies.data.videos.Video;
 import io.github.josephx86.popularmovies.data.movies.Movie;
@@ -37,8 +38,7 @@ public class TMDBHelper {
         // https://developers.themoviedb.org/3/configuration/get-api-configuration
 
         String json = "";
-        String key = context.getString(R.string.tmdb_api_key);
-        String address = String.format(Locale.US, "%s?api_key=%s", CONFIG_URL, key);
+        String address = String.format(Locale.US, "%s?api_key=%s", CONFIG_URL, BuildConfig.TMDB_API_KEY);
         URL url;
         try {
             url = new URL(address);
@@ -150,7 +150,6 @@ public class TMDBHelper {
                     // First get the api configuration
                     setConfiguration(context);
 
-                    String apiKey = context.getString(R.string.tmdb_api_key);
                     String path = "";
                     MoviesAdapter.SortType sortBy = Utils.getSortOrderPreference(context);
                     if (sortBy == MoviesAdapter.SortType.Rating) {
@@ -158,8 +157,9 @@ public class TMDBHelper {
                     } else if (sortBy == MoviesAdapter.SortType.Popularity) {
                         path = "movie/popular";
                     }
+                    String k = BuildConfig.TMDB_API_KEY;
                     String apiEndpoint = String.format(Locale.US, "%s%s?api_key=%s&language=en-US&page=%d",
-                            API_BASE_URL, path, apiKey, currentMovieListPage);
+                            API_BASE_URL, path, k, currentMovieListPage);
                     String json = httpGet(apiEndpoint);
 
                     // Parse JSON data
@@ -258,9 +258,8 @@ public class TMDBHelper {
                     return reviews;
                 }
 
-                String apiKey = context.getString(R.string.tmdb_api_key);
                 String reviewsEndpoint = String.format(Locale.US, "%smovie/%d/reviews?api_key=%s&language=en-US&page=%d",
-                        API_BASE_URL, movieId, apiKey, currentReviewListPage);
+                        API_BASE_URL, movieId, BuildConfig.TMDB_API_KEY, currentReviewListPage);
                 String json = httpGet(reviewsEndpoint);
 
                 // Parse JSON data
@@ -310,9 +309,8 @@ public class TMDBHelper {
             protected List<Video> doInBackground(Void... voids) {
                 List<Video> videos = new ArrayList<>();
 
-                String apiKey = context.getString(R.string.tmdb_api_key);
                 String videosEndpoint = String.format(Locale.US, "%smovie/%d/videos?api_key=%s&language=en-US",
-                        API_BASE_URL, movieId, apiKey);
+                        API_BASE_URL, movieId, BuildConfig.TMDB_API_KEY);
                 String json = httpGet(videosEndpoint);
 
                 // Parse JSON data
